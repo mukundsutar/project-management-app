@@ -1,10 +1,5 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import Requirement from "../(tabs)/requirement.jsx";
-import Material from "../(tabs)/material.jsx";
-import Prototype from "../(tabs)/prototype.jsx";
-import Production from "../(tabs)/production.jsx";
-import Rework from "../(tabs)/rework.jsx";
-import Delivery from "../(tabs)/delivery.jsx";
+
 import TemplateComponent from "../(tabs)/template.jsx";
 
 const Tab = createMaterialTopTabNavigator();
