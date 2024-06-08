@@ -1,17 +1,11 @@
-import {
-    View,
-    Text,
-    StyleSheet,
-    FlatList,
-    ScrollView,
-    RefreshControl,
-} from "react-native";
+import { View, StyleSheet, RefreshControl } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Avatar, Card, FAB, IconButton } from "react-native-paper";
+import { FAB } from "react-native-paper";
 import { router } from "expo-router";
 import { supabase } from "../../lib/supabase";
 import { Divider, List, ListItem } from "@ui-kitten/components";
 import { useCallback } from "react";
+import { fetchTable } from "../../lib/queryLogic";
 
 export default function Schedule() {
     const [refreshing, setRefreshing] = useState(false);
@@ -32,9 +26,12 @@ export default function Schedule() {
     }, []);
 
     async function fetchSchedule() {
-        const { data, error } = await supabase.from("taskList").select();
-
-        setTask(data);
+        try {
+            const data = await fetchTable("taskList");
+            setTask(data);
+        } catch (error) {
+            console.error("Error fetching data:", error.message);
+        }
     }
 
     const renderItem = ({ item, index }) => (
@@ -43,18 +40,20 @@ export default function Schedule() {
 
     return (
         <View className="h-full w-full ">
-            <List
-                style={styles.container}
-                data={tasks}
-                ItemSeparatorComponent={Divider}
-                renderItem={renderItem}
-                refreshControl={
-                    <RefreshControl
-                        refreshing={refreshing}
-                        onRefresh={onRefresh}
-                    />
-                }
-            />
+            {tasks && (
+                <List
+                    style={styles.container}
+                    data={tasks}
+                    ItemSeparatorComponent={Divider}
+                    renderItem={renderItem}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={refreshing}
+                            onRefresh={onRefresh}
+                        />
+                    }
+                />
+            )}
             <FAB
                 icon="plus"
                 style={styles.fab}

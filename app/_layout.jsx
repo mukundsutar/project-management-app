@@ -5,6 +5,8 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ApplicationProvider } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Button } from "react-native";
+import { Text } from "react-native";
 
 export default function DrawerLayout() {
     return (
@@ -36,6 +38,7 @@ export default function DrawerLayout() {
                             options={{
                                 drawerLabel: "Process",
                                 title: "Entire Process",
+                                
                             }}
                         />
                         <Drawer.Screen

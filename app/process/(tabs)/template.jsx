@@ -5,6 +5,7 @@ import { router } from "expo-router";
 import { supabase } from "../../../lib/supabase";
 import { Divider, List, ListItem } from "@ui-kitten/components";
 import { useCallback } from "react";
+import { fetchTable } from "../../../lib/queryLogic";
 
 export default function TemplateComponent({ route }) {
     const { name } = route.params;
@@ -27,9 +28,12 @@ export default function TemplateComponent({ route }) {
     }, []);
 
     async function fetchSchedule() {
-        const { data, error } = await supabase.from(name).select();
-
-        setTask(data);
+        try {
+            const data = await fetchTable(name);
+            setTask(data);
+        } catch (error) {
+            console.error("Error fetching data:", error.message);
+        }
     }
 
     const renderItem = ({ item, index }) => (
