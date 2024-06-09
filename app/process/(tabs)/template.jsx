@@ -2,7 +2,6 @@ import { View, StyleSheet, RefreshControl } from "react-native";
 import React, { useEffect, useState } from "react";
 import { FAB } from "react-native-paper";
 import { router } from "expo-router";
-import { supabase } from "../../../lib/supabase";
 import { Divider, List, ListItem } from "@ui-kitten/components";
 import { useCallback } from "react";
 import { fetchTable } from "../../../lib/queryLogic";
