@@ -38,7 +38,6 @@ export default function DrawerLayout() {
                             options={{
                                 drawerLabel: "Process",
                                 title: "Entire Process",
-                                
                             }}
                         />
                         <Drawer.Screen
@@ -53,6 +52,13 @@ export default function DrawerLayout() {
                             options={{
                                 drawerLabel: "Profile",
                                 title: "Welcome to Profile!",
+                            }}
+                        />
+                        <Drawer.Screen
+                            name="test"
+                            options={{
+                                drawerLabel: "Test",
+                                title: "Welcome to testing Chambers!",
                             }}
                         />
                     </Drawer>

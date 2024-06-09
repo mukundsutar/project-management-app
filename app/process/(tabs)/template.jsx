@@ -8,7 +8,7 @@ import { useCallback } from "react";
 import { fetchTable } from "../../../lib/queryLogic";
 
 export default function TemplateComponent({ route }) {
-    const { name } = route.params;
+    const { name: processName } = route.params;
 
     const [refreshing, setRefreshing] = useState(false);
     const [tasks, setTask] = useState([]);
@@ -29,7 +29,8 @@ export default function TemplateComponent({ route }) {
 
     async function fetchSchedule() {
         try {
-            const data = await fetchTable(name);
+            const data = await fetchTable("taskList", processName);
+
             setTask(data);
         } catch (error) {
             console.error("Error fetching data:", error.message);
