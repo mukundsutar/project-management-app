@@ -1,11 +1,20 @@
 import { View, StyleSheet, RefreshControl } from "react-native";
 import React, { useEffect, useState } from "react";
-import { FAB } from "react-native-paper";
+import { FAB, Icon } from "react-native-paper";
 import { router } from "expo-router";
-import { supabase } from "../../lib/supabase";
-import { Divider, List, ListItem } from "@ui-kitten/components";
+import {
+    Button,
+    ButtonGroup,
+    Divider,
+    List,
+    ListItem,
+} from "@ui-kitten/components";
 import { useCallback } from "react";
 import { fetchTable } from "../../lib/queryLogic";
+import { supabase } from "../../lib/supabase";
+
+const DeleteIcon = (props) => <Icon source="delete" color="white" size={20}/>;
+const EditIcon = (props) => <Icon source="pencil" color="white" size={20}/>;
 
 export default function Schedule() {
     const [refreshing, setRefreshing] = useState(false);
@@ -35,7 +44,26 @@ export default function Schedule() {
     }
 
     const renderItem = ({ item, index }) => (
-        <ListItem title={item.title} description={item.task} />
+        <ListItem
+            title={item.title}
+            description={item.task}
+            accessoryRight={() => (
+                <ButtonGroup>
+                    <Button accessoryLeft={EditIcon} />
+                    <Button
+                        accessoryLeft={DeleteIcon}
+                        onPress={async () => {
+                            const response = await supabase
+                                .from("taskList")
+                                .delete()
+                                .eq("id", item.id);
+
+                            onRefresh();
+                        }}
+                    />
+                </ButtonGroup>
+            )}
+        />
     );
 
     return (

@@ -16,7 +16,7 @@ export default function Home() {
                     <FAB
                         icon="plus"
                         style={styles.fab}
-                        onPress={() => router.navigate("/newtask")}
+                        onPress={() => router.navigate("/process")}
                     />
                 </View>
             </ApplicationProvider>

@@ -1,6 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Button, Chip, TextInput } from "react-native-paper";
+import {
+    ActivityIndicator,
+    Button,
+    Chip,
+    MD2Colors,
+    TextInput,
+} from "react-native-paper";
 import { router } from "expo-router";
 import { supabase } from "../../lib/supabase";
 
@@ -15,8 +21,11 @@ export default function NewTask() {
         rework: false,
         delivery: false,
     });
+    const [isLoading, setIsLoading] = useState(false);
 
     async function insertTask() {
+        setIsLoading(true);
+
         var insertArray = [];
         for (const key in chipData) {
             if (chipData[key] == true) {
@@ -30,11 +39,8 @@ export default function NewTask() {
             category: insertArray,
         });
 
-        // const { data, error } = await supabase
-        //     .from("arraytest")
-        //     .insert([{ id: 2, textarray: ["one", "two", "three", "four"] }]);
-
         setTimeout(() => {
+            setIsLoading(false);
             router.navigate({ pathname: "/schedule", param: { id: 1 } });
         }, 200);
     }
@@ -117,6 +123,12 @@ export default function NewTask() {
                     Delivery
                 </Chip>
             </View>
+
+            <ActivityIndicator
+                animating={isLoading}
+                size={"small"}
+                color={MD2Colors.red800}
+            />
 
             <Button
                 icon="pen-plus"
