@@ -7,6 +7,7 @@ import * as eva from "@eva-design/eva";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button } from "react-native";
 import { Text } from "react-native";
+import { Stack } from "expo-router";
 
 export default function DrawerLayout() {
     return (
@@ -52,13 +53,6 @@ export default function DrawerLayout() {
                             options={{
                                 drawerLabel: "Profile",
                                 title: "Welcome to Profile!",
-                            }}
-                        />
-                        <Drawer.Screen
-                            name="test"
-                            options={{
-                                drawerLabel: "Test",
-                                title: "Welcome to testing Chambers!",
                             }}
                         />
                     </Drawer>

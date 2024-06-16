@@ -14,7 +14,7 @@ import { fetchTable } from "../../lib/queryLogic";
 import { supabase } from "../../lib/supabase";
 
 const DeleteIcon = (props) => <Icon source="delete" color="white" size={20}/>;
-const EditIcon = (props) => <Icon source="pencil" color="white" size={20}/>;
+const CheckIcon = (props) => <Icon source="check" color="white" size={20}/>;
 
 export default function Schedule() {
     const [refreshing, setRefreshing] = useState(false);
@@ -49,7 +49,7 @@ export default function Schedule() {
             description={item.task}
             accessoryRight={() => (
                 <ButtonGroup>
-                    <Button accessoryLeft={EditIcon} />
+                    <Button accessoryLeft={CheckIcon} />
                     <Button
                         accessoryLeft={DeleteIcon}
                         onPress={async () => {

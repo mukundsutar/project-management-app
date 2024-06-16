@@ -13,7 +13,7 @@ import { useCallback } from "react";
 import { fetchTable } from "../../../lib/queryLogic";
 
 const DeleteIcon = (props) => <Icon source="delete" color="white" size={20} />;
-const EditIcon = (props) => <Icon source="pencil" color="white" size={20} />;
+const CheckIcon = (props) => <Icon source="check" color="white" size={20}/>;
 
 export default function TemplateComponent({ route }) {
     const { name: processName } = route.params;
@@ -51,7 +51,7 @@ export default function TemplateComponent({ route }) {
             description={item.task}
             accessoryRight={() => (
                 <ButtonGroup>
-                    <Button accessoryLeft={EditIcon} />
+                    <Button accessoryLeft={CheckIcon} />
                     <Button
                         accessoryLeft={DeleteIcon}
                         onPress={async () => {
